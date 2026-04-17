@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>マイページ - 平工マッチング</title>
+    <link rel="stylesheet" href="home-style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo" onclick="location.href='home.html'" style="cursor:pointer">平工マッチング</div>
+        <div class="nav-links">
+            <span class="nav-item" onclick="location.href='home.html?tab=recruit'">募集</span>
+            <span class="nav-item" onclick="location.href='home.html'">探す</span>
+            <span class="nav-item" onclick="location.href='messages.html'">メッセージ</span>
+            <span class="nav-item active">マイページ</span>
+            <button class="btn-logout" onclick="logout()">ログアウト</button>
+        </div>
+    </header>
+    <main class="container">
+        <div style="background: white; padding: 30px; border-radius: 12px; max-width: 500px; margin: 0 auto; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+            <h2>プロフィール編集</h2>
+            <div style="margin-bottom: 20px; text-align: left;">
+                <label style="font-weight: bold; display: block; margin-bottom: 5px;">表示名</label>
+                <input type="text" id="my-name" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box;">
+            </div>
+            <div style="margin-bottom: 20px; text-align: left;">
+                <label style="font-weight: bold; display: block; margin-bottom: 5px;">自己紹介</label>
+                <textarea id="my-bio" rows="5" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box;"></textarea>
+            </div>
+            <button class="btn-search" onclick="saveProfile()">保存してホームに戻る</button>
+        </div>
+    </main>
+    <script>
+        function logout() { if(confirm("ログアウトしますか？")) window.location.href = "index.html"; }
+        window.onload = function() {
+            document.getElementById("my-name").value = localStorage.getItem("userName") || "";
+            document.getElementById("my-bio").value = localStorage.getItem("userBio") || "";
+        }
+        function saveProfile() {
+            localStorage.setItem("userName", document.getElementById("my-name").value);
+            localStorage.setItem("userBio", document.getElementById("my-bio").value);
+            alert("保存しました！");
+            location.href = 'home.html';
+        }
+    </script>
+</body>
+</html>
